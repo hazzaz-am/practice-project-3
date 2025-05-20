@@ -1,8 +1,8 @@
-import { movies } from "../../data/data";
+import { getAllMovies } from "../../data/movies";
 import MovieItem from "./MovieItem";
 
 export default function MovieContent() {
-	const renderMovies = movies.map((movie) => (
+	const renderMovies = getAllMovies().map((movie) => (
 		<MovieItem key={movie.title} movie={movie} />
 	));
 

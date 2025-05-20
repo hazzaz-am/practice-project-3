@@ -1,21 +1,59 @@
 import logo from "../../assets/logo.svg";
-import { navMenus } from "../../data/data";
-import NavItem from "./NavItem";
+import ring from "../../assets/ring.svg";
+import moon from "../../assets/icons/moon.svg";
+import cart from "../../assets/shopping-cart.svg";
+import { useState } from "react";
+import Modal from "../ui/Modal";
 
 export default function Header() {
-	const renderHeaderItems = navMenus.map((item) => (
-		<NavItem key={item.name} item={item} />
-	));
+	const [showCart, setShowCart] = useState(false);
+
+	function handleShowCart() {
+		setShowCart(true);
+	}
+
+	function handleCloseCart() {
+		setShowCart(false);
+	}
 
 	return (
-		<header>
-			<nav className="mx-auto container flex items-center justify-between space-x-10 py-6">
-				<a href="index.html">
-					<img src={logo} width="139" height="26" alt="" />
-				</a>
+		<>
+			{showCart && <Modal onCloseModal={handleCloseCart} />}
+			<header>
+				<nav className="mx-auto container flex items-center justify-between space-x-10 py-6">
+					<a href="index.html">
+						<img src={logo} width="139" height="26" alt="" />
+					</a>
 
-				<ul className="flex items-center space-x-5">{renderHeaderItems}</ul>
-			</nav>
-		</header>
+					<ul className="flex items-center space-x-5">
+						<li>
+							<a
+								href="Ring"
+								className="bg-primary/20 dark:bg-primary/[7%] rounded-lg backdrop-blur-[2px] p-1 inline-block"
+							>
+								<img src={ring} width="24" height="24" alt="" />
+							</a>
+						</li>
+						<li>
+							<a
+								href="Moon"
+								className="bg-primary/20 dark:bg-primary/[7%] rounded-lg backdrop-blur-[2px] p-1 inline-block"
+							>
+								<img src={moon} width="24" height="24" alt="" />
+							</a>
+						</li>
+						<li>
+							<a
+								href="#"
+								className="bg-primary/20 dark:bg-primary/[7%] rounded-lg backdrop-blur-[2px] p-1 inline-block"
+								onClick={handleShowCart}
+							>
+								<img src={cart} width="24" height="24" alt="" />
+							</a>
+						</li>
+					</ul>
+				</nav>
+			</header>
+		</>
 	);
 }

@@ -1,4 +1,9 @@
-export default function Cart() {
+import cartItem from "../assets/cart-item.png";
+import checkout from "../assets/icons/checkout.svg";
+import deleteImg from "../assets//delete.svg";
+import { getImageUrl } from "../utils/getImageUrl";
+
+export default function Cart({ onShowCart }) {
 	return (
 		<div className="fixed top-0 left-0 w-screen h-screen z-50 bg-black/60 backdrop-blur-sm">
 			<div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[420px] sm:max-w-[600px] lg:max-w-[790px] p-4 max-h-[90vh] overflow-auto">
@@ -11,7 +16,7 @@ export default function Cart() {
 							<div className="flex items-center gap-4">
 								<img
 									className="rounded overflow-hidden"
-									src="/assets/cart-item.png"
+									src={getImageUrl(cartItem)}
 									alt=""
 								/>
 								<div>
@@ -24,7 +29,7 @@ export default function Cart() {
 							</div>
 							<div className="flex justify-between gap-4 items-center">
 								<button className="bg-[#D42967] rounded-md p-2 md:px-4 inline-flex items-center space-x-2 text-white">
-									<img className="w-5 h-5" src="./assets/delete.svg" alt="" />
+									<img className="w-5 h-5" src={getImageUrl(deleteImg)} alt="" />
 									<span className="max-md:hidden">Remove</span>
 								</button>
 							</div>
@@ -33,7 +38,7 @@ export default function Cart() {
 							<div className="flex items-center gap-4">
 								<img
 									className="rounded overflow-hidden"
-									src="/assets/cart-item.png"
+									src={getImageUrl(cartItem)}
 									alt=""
 								/>
 								<div>
@@ -46,7 +51,7 @@ export default function Cart() {
 							</div>
 							<div className="flex justify-between gap-4 items-center">
 								<button className="bg-[#D42967] rounded-md p-2 md:px-4 inline-flex items-center space-x-2 text-white">
-									<img className="w-5 h-5" src="./assets/delete.svg" alt="" />
+									<img className="w-5 h-5" src={getImageUrl(deleteImg)} alt="" />
 									<span className="max-md:hidden">Remove</span>
 								</button>
 							</div>
@@ -57,17 +62,13 @@ export default function Cart() {
 							className="rounded-md p-2 md:px-4 inline-flex items-center space-x-2 bg-primary text-[#171923] text-sm"
 							href="#"
 						>
-							<img
-								src="./assets/icons/checkout.svg"
-								width="24"
-								height="24"
-								alt=""
-							/>
+							<img src={getImageUrl(checkout)} width="24" height="24" alt="" />
 							<span>Checkout</span>
 						</a>
 						<a
 							className="border border-[#74766F] rounded-lg py-2 px-5 flex items-center justify-center gap-2 text-[#6F6F6F] dark:text-gray-200 font-semibold text-sm"
 							href="#"
+							onClick={onShowCart}
 						>
 							Cancel
 						</a>

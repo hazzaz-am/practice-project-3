@@ -11,7 +11,6 @@ export default function App() {
 			<main>
 				<div className="container mx-auto grid lg:grid-cols-[218px_1fr] gap-[3.5rem]">
 					<Sidebar />
-
 					<MovieContent />
 				</div>
 			</main>
