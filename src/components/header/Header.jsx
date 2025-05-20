@@ -4,12 +4,17 @@ import moon from "../../assets/icons/moon.svg";
 import cart from "../../assets/shopping-cart.svg";
 import { useState } from "react";
 import Modal from "../ui/Modal";
+import Cart from "../Cart";
+import { useContext } from "react";
+import { MovieContext } from "../../contexts";
 
 export default function Header() {
 	const [showCart, setShowCart] = useState(false);
+	const { cartData } = useContext(MovieContext);
 
 	function handleShowCart() {
 		setShowCart(true);
+		console.log(cartData);
 	}
 
 	function handleCloseCart() {
@@ -18,7 +23,7 @@ export default function Header() {
 
 	return (
 		<>
-			{showCart && <Modal onCloseModal={handleCloseCart} />}
+			{showCart && <Cart onCloseCart={handleCloseCart} />}
 			<header>
 				<nav className="mx-auto container flex items-center justify-between space-x-10 py-6">
 					<a href="index.html">
@@ -49,6 +54,11 @@ export default function Header() {
 								onClick={handleShowCart}
 							>
 								<img src={cart} width="24" height="24" alt="" />
+								{cartData.length > 0 && (
+									<span className="rounded-full absolute top-[-12px] left-[24px] bg-[#12cf6f] text-white text-center p-[2px] w-[25px] h-[25px]">
+										{cartData.length}
+									</span>
+								)}
 							</a>
 						</li>
 					</ul>
