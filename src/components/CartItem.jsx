@@ -1,14 +1,17 @@
 import { getImageUrl } from "../utils/getImageUrl";
 import deleteImg from "../assets//delete.svg";
 import { useContext } from "react";
-import { MovieContext } from "../contexts";
+import { MovieContext, ThemeContext } from "../contexts";
 
 export default function CartItem({ cartItem }) {
-	const { cartData, setCartData } = useContext(MovieContext);
+	const { dispatch } = useContext(MovieContext);
+	const { darkMode } = useContext(ThemeContext);
 
-	function handleRemoveFromCart(movieId) {
-		const cartAfterDeleted = cartData.filter((cart) => cart.id !== movieId);
-		setCartData(cartAfterDeleted);
+	function handleRemoveFromCart(movie) {
+		dispatch({
+			type: "REMOVE_FROM_CART",
+			payload: movie,
+		});
 	}
 
 	return (
@@ -22,16 +25,22 @@ export default function CartItem({ cartItem }) {
 					height={"50px"}
 				/>
 				<div>
-					<h3 className="text-base md:text-xl font-bold text-white">
+					<h3
+						className={`text-base md:text-xl font-bold ${
+							darkMode ? "text-white" : "text-black"
+						}`}
+					>
 						{cartItem?.title}
 					</h3>
 					<p className="max-md:text-xs text-[#575A6E]">{cartItem.genre}</p>
-					<span className="max-md:text-xs">${cartItem.price}</span>
+					<span className={`max-md:text-xs ${darkMode ? "" : "text-black"}`}>
+						${cartItem.price}
+					</span>
 				</div>
 			</div>
 			<div className="flex justify-between gap-4 items-center">
 				<button
-					onClick={() => handleRemoveFromCart(cartItem.id)}
+					onClick={() => handleRemoveFromCart(cartItem)}
 					className="bg-[#D42967] rounded-md p-2 md:px-4 inline-flex items-center space-x-2 text-white cursor-pointer"
 				>
 					<img className="w-5 h-5" src={deleteImg} alt="" />
